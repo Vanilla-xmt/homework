@@ -1,0 +1,19 @@
+#include "stdio.h"
+int main(void)
+{
+    int a,b,r;
+	  scanf("%d %d",&a,&b);
+	  while(r)
+	  {
+		  r=a%b;
+		  a=b;
+		  b=r;
+	  }
+	  printf("%d",a);
+	  return 0;
+}
+
+假设 a = kb + r 此时 r = a % b
+假设 gcd(a,b) = c 所以 c|a、c|b 即 c 是a和b的约数
+此时 r = a - kb 所以 c 也是 r 的约数 
+所以gcd(a,b) = gcd(b,a % b) ,当r = 0 时 也就是 b 为公约数 
