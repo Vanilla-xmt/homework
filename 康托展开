@@ -1,0 +1,27 @@
+康托展开是一个全排列到一个自然数的双射，常用于构建hash表时的空间压缩。
+设有n个数（1，2，3，4,…,n），可以有组成不同(n!种)的排列组合，康托展开表示的就是是当前排列组合在n个不同元素的全排列中的名次。
+名次x=a[n]*(n-1)!+a[n-1]*(n-2)!+...+a[i]*(i-1)!+...+a[1]*0!
+a[n]为在这个数后面小于这个数的数字个数
+
+#include<stdio.h>
+
+int main(void)
+{
+	int n;
+	scanf("%d",&n);
+	char a[5];
+	scanf("%s",a);
+	int JC[]={1,1,2,6,24,120,720};
+	int x,smaller;
+	x=1;
+	for(int i=0;i<n;i++)
+	{
+		smaller=0;
+		for(int j=i+1;j<n;j++)
+			if(a[j]<a[i])
+				smaller++;
+		x += smaller*JC[n-i-1];
+	}
+	printf("%d",x);
+    return 0;
+}
