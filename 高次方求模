@@ -1,0 +1,25 @@
+对于高次方求模，当指数位置数字很大时不好求，所以要用一个定理
+当底数n可写成n=n1*n2*...*nn时，n mod m=（n1 mod m*n2 mod m*...*nn mod m） mod m
+所以就可以用二分法拆分pow（n，p），直至p=1，二分的过程中对m求模
+
+#include<stdio.h>
+
+int main(void)
+{
+	int p,n;
+	scanf("%d %d",&n,&p);
+	int m;
+	scanf("%d",&m);
+	int result = 1;
+	while(p>0)
+	{
+		if (p%2==1)
+		{
+			result=(result*n)%m;
+		}
+		p/=2;
+		n=(n*n)%m;
+	}
+	printf("%d",result);
+	return 0;
+}
