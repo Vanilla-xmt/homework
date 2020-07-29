@@ -1,0 +1,33 @@
+2. 给定一个 n x n 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第k小的元素。
+请注意，它是排序后的第k小元素，而不是第k个元素。
+#include<stdio.h>
+int main(void)
+{
+    int g,n;
+    scanf("%d %d",&g,&n);
+    int a[n][n],i,j;
+    for(i=0;i<n;i++)
+        for(j=0;j<n;j++)
+            scanf("%d",&a[i][j]);
+    int b[2*n+1];
+    int k=0,t;
+    for(i=0;i<n;i++)
+        for(j=0;j<n;j++)
+        {
+            b[k]=a[i][j];
+            k++;
+        }
+    for(i=0;i<k;i++)
+        for(j=0;j<k-i;j++)
+        {
+            if(b[j]>b[j+1])
+            {
+                t=b[j];
+                b[j]=b[j+1];
+                b[j+1]=t;
+            }
+        }
+    printf("%d",b[g-1]);
+    return 0;
+}
+答题思路：由题意，需要我们比较二维数组内数字的大小并排列，然后求出第g小的数字并输出，所以我设了一个空的一维数组存放n*n个数字，然后运用冒泡排序求出顺序，最后得出答案。
