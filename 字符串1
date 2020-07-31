@@ -1,0 +1,40 @@
+输入一个正整数 repeat (0<repeat<10)，做 repeat 次下列运算：
+输入一个字符串 t 和一个正整数 m，将字符串 t 中从第 m 个字符开始的全部字符复制到字符串 s 中，再输出字符串 s。
+要求定义并调用函数 strmcpy(s,t,m), 它的功能是将字符串 t 中从第 m 个字符开始的全部字符复制到字符串 s 中，函数形参s和t的类型是字符指针，形参m的类型是int，函数类型是void。
+#include<stdio.h>
+#include<string.h>
+int main(void)
+{
+    int repeat,m;
+    scanf("%d",&repeat);
+    for(m=0;m<repeat;m++)
+    {
+        char a[100];
+        int n,t;
+        scanf("%s",a);
+        n=strlen(a);
+        char b[100];
+        scanf("%d",&t);
+        if(t>n)
+        printf("error input\n");
+        else
+        {
+            strmcpy(&b,&a,t);
+            printf("%s",b);
+            printf("\n");
+        }
+    }
+    return 0;
+}
+void strmcpy(char *p,char *q,int k)
+{
+    int i,j,c=0;
+    j=strlen(q);
+    for(i=k-1;i<j;i++)
+    {
+        *(p+c)=*(q+i);
+        c++;
+    }
+    *(p+c)='\0';
+}
+答题思路：由题目，类似要写一个复制字符串的函数，然后题目规定是要用指针，然后我觉得没什么需要特别注意的点，如果硬要算的话，输入字符串那个%s值得注意一下。
