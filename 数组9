@@ -1,0 +1,18 @@
+9.（c++练手） 输入n个整数，输出出现次数大于等于数组长度一半的数
+ #include<iostream>
+using namespace std;
+
+int main()
+{
+    int c[100]={0};
+    int aa,n=0;
+    while(cin>>aa)
+    {
+        c[aa]++;
+        n++;
+    }
+    for(int i=0;i<100;i++)
+        if(c[i]>=n/2)
+            cout<<i<<endl;
+}
+答题思路：这题没什么难度，因为没学过c++，所以这个题是我用来试一下c++的题目，思路就是记录每个数字的出现次数，如果大于等于n/2就输出。
