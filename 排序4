@@ -1,0 +1,33 @@
+4. 中位数定义：一组数据按从小到大的顺序依次排列，处在中间位置的一个数（或最中间两个数据的平均数）. 给出一组无序整数，求出中位数，如果求最中间两个数的平均数，向下取整即可（不需要使用浮点数）
+#include<iostream>
+using namespace std;
+
+int main()
+{
+    int n;
+    int sum;
+    int a[10000];
+    while(cin>>n)
+    {
+        if(n==0) break;
+        a[10000]={0};
+        for(int i=0;i<n;i++)
+            cin>>a[i];
+        int t;
+        for(int i=0;i<n-1;i++)
+            for(int j=i+1;j<n;j++)
+                if(a[i]>a[j])
+                {
+                    t=a[i];
+                    a[i]=a[j];
+                    a[j]=t;
+                }
+        if(n%2==0)
+            sum=(a[n/2]+a[n/2-1])/2;
+        else
+            sum=a[n/2];
+        cout<<sum<<"\n"<<endl;
+    }
+    return 0;
+}
+答题思路：这题是求中位数，用到了选择排序，总体不难，然后有一个需要注意的点是后面排序好求中位数的时候，因为数组是从0开始，所以求中位数的式子和一般的有点不一样。
