@@ -1,0 +1,39 @@
+3．用一维数组存储学号和成绩，然后，按成绩排序输出。
+#include<stdio.h>
+struct students{
+    int id;
+    int average;
+};
+typedef struct students p;
+int main(void)
+{
+    int n,i;
+    scanf("%d",&n);
+    p student[n+1];
+    p t;
+    for(i=0;i<n;i++)
+        scanf("%d %d",&student[i].id,&student[i].average);
+    for(i=0;i<n;i++)
+        for(int j=0;j<n-i-1;j++)
+        {
+            if(student[j].average>student[j+1].average)
+            {
+                t=student[j];
+                student[j]=student[j+1];
+                student[j+1]=t;
+            }
+            else if(student[j].average==student[j+1].average)
+            {
+                if(student[j].id>student[j+1].id)
+                {
+                    t=student[j];
+                    student[j]=student[j+1];
+                    student[j+1]=t;
+                }
+            }
+        }
+    for(i=0;i<n;i++)
+        printf("%d %d\n",student[i].id,student[i].average);
+    return 0;
+}
+答题思路：这个题很简单，就是用结构体代表两个元素，然后运用冒泡排序比较大小输出就可以了。
