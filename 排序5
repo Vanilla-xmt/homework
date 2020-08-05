@@ -1,0 +1,39 @@
+5. 浙江桐乡乌镇共有n个人,请找出该镇上的前m个大富翁
+#include<iostream>
+#include<algorithm>
+using namespace std;
+bool compare(int a,int b)
+{
+     return a>b;
+}
+
+int main()
+{
+    int n,m,i,j;
+    int a[100010];
+    while(cin>>n>>m)
+    {
+        a[100010]={0};
+        for(i=0;i<n;i++)
+            cin>>a[i];
+        sort(a,a+n,compare);
+        if(m<=n)
+        {
+            for(i=0;i<m;i++)
+            {
+                printf("%d ",a[i]);
+            }
+        }
+        else
+        {
+            for(i=0;i<n;i++)
+            {
+                printf("%d ",a[i]);
+            }
+        }
+    }
+    return 0;
+}
+答题思路：这题相当于就是对一个数组进行从大到小排序，然后输出前m个数据，然后这个题一开始我是用选择排序写的，不过一直超时，然后我
+看了一下那些通过的代码，发现都是用的sort函数，所以我去查了一下，sort是c++里面排序的函数，头文件是#include<algorithm>，然后格
+式是sort(数组起始地址，需要排序的终点，顺序)，然后一般如果是从小到大排列是不需要写第三项的，如果是从大到小就和这题代码一样的。
