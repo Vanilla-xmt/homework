@@ -1,0 +1,35 @@
+6. 输入一个数n，然后输入n个数值各不相同，调换数组中最大和最小的两个数，然后输出。
+#include<iostream>
+using namespace std;
+int main()
+{
+    int n,i;
+    cin>>n;
+    int a[25];
+    for(i=0;i<n;i++)
+        cin>>a[i];
+    int max=a[0];
+    int min=a[0];
+    int x=0,y=0;
+    for(i=0;i<n;i++)
+    {
+        if(max<a[i])
+        {
+            max=a[i];
+            x=i;
+        }
+        if(min>a[i])
+        {
+            min=a[i];
+            y=i;
+        }
+    }
+    int t;
+    t=a[x];
+    a[x]=a[y];
+    a[y]=t;
+    for(i=0;i<n;i++)
+        cout<<a[i]<<' ';
+    return 0;
+}
+答题思路：这题看起来真的不难，但是我做的时候，就一直显示段错误过不了，后来我把x，y初始化，然后这个题才通过，所以初始化真的很重要。因为这个原因我还是把这题收录起来了。
