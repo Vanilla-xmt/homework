@@ -1,0 +1,26 @@
+10. 存在两组数组，和4个数字a,b,c,d,要求做如下操作，将第一个数组第a个数到第b个数，第二个数组的第c个数到第d个数放到一个数组中，求出合并后数组的中间值，如果有两个中间值，取下标较小的那个。
+#include<iostream>
+using namespace std;
+int main()
+{
+    int n,m,i;
+    cin>>n>>m;
+    int aa[n+1],bb[m+1];
+    for(i=0;i<n;i++)
+        cin>>aa[i];
+    for(i=0;i<m;i++)
+        cin>>bb[i];
+    int a,b,c,d,k=0;
+    cin>>a>>b>>c>>d;
+    int cc[10005]={0};
+    for(i=a-1;i<b;i++)
+        cc[k++]=aa[i];
+    for(i=c-1;i<d;i++)
+        cc[k++]=bb[i];
+    if(k%2==1)
+        cout<<cc[(k-1)/2]<<endl;
+    else
+        cout<<cc[k/2-1]<<endl;
+    return 0;
+}
+答题思路：通过题目，可以知道我们需要将第一个数组的a-1到b-1的数字依次存入一个数组，将第二个数组的c-1到d-1的数字依次存入上面的数组，不需要改变顺序，然后求中间值就可以了。
