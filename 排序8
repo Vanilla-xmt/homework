@@ -1,0 +1,25 @@
+8. 查找一个数组的第K小的数，注意同样大小算一样大。 如  2 1 3 4 5 2 第三小数为3。
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    int n,i,m;
+    cin>>n;
+    int a[n+1];
+    for(i=0;i<n;i++)
+        cin>>a[i];
+    cin>>m;
+    sort(a,a+n);
+    int k=0,j;
+    for(i=0;i<n;i++)
+        if(a[i]!=a[i+1])
+        {
+            k++;
+            if(k==m)
+                j=i;
+        }
+    cout<<a[j]<<endl;
+    return 0;
+}
+答题思路：这题首先需要对数组内的数进行排序，然后需要注意的是，这个题中一样的数字算一样大，然后我设了一个数k来记录有没有数相同，然后再根据输入的m和k对比得出答案。
