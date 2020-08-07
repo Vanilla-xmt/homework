@@ -1,0 +1,18 @@
+14. 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。
+class Solution {
+public:
+    void reOrderArray(vector<int> &array) {
+        int len=array.size();
+        vector<int> a(len,0);
+        int k=0;
+        for(int i=0;i<len;i++)
+            if(array[i]%2==1)
+                a[k++]=array[i];
+        for(int i=0;i<len;i++)
+            if(array[i]%2==0)
+                a[k++]=array[i];
+        array=a;
+    }
+};
+答题思路：这题首先我定义了一个和array同类型的数组，用来储存换了位置之后的数组，然后需要注意的是，这种题目是写函数的，需要看函数类型，一开始我写的return a；然后显示编译错误，
+所以后来观察了一下函数是void不需要返回，就改成array=a然后就成功了。
