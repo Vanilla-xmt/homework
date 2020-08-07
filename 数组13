@@ -1,0 +1,18 @@
+13. 有一副由NxN矩阵表示的图像，这里每个像素用一个int表示，请编写一个算法，在不占用额外内存空间的情况下(即不使用缓存矩阵)，将图像顺时针旋转90度。
+给定一个NxN的矩阵，和矩阵的阶数N,请返回旋转后的NxN矩阵,保证N小于等于500，图像元素小于等于256。
+class Transform {
+public:
+    vector<vector<int> > transformImage(vector<vector<int> > mat, int n) {
+        vector<vector<int>> temp=mat;
+        int i;
+        for(i=0;i<n;i++)
+            for(int j=0;j<n;j++)
+                temp[i][j]=mat[n-1-j][i];
+        return temp;
+    }
+};
+答题思路：这题用到了vector，向量 vector 是一种对象实体, 能够容纳许多其他类型相同的元素, 因此又被称为容器。 与string相同, vector 同属于STL(Standard Template
+Library, 标准模板库)中的一种自定义的数据类型, 可以广义上认为是数组的增强版，vector 容器与数组相比其优点在于它能够根据需要随时自动调整自身的大小以便容下所要放入
+的元素。此外, vector 也提供了许多的方法来对自身进行操作。
+    这些是我百度到的，因为这个题用常规的定义一个int类型的数组无法通过，所以在看到题目中的vector就好奇去查了一下，然后定义一个和mat同类型的数组，然后算出转90度的
+规律这题就写出来了。
