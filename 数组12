@@ -1,0 +1,23 @@
+12. 请编写一个算法，若N阶方阵中某个元素为0，则将其所在的行与列清零。
+给定一个N阶方阵int[][](C++中为vector<vector><int>>)mat和矩阵的阶数n，请返回完成操作后的int[][]方阵(C++中为vector<vector><int>>)，保证n小于等于300，矩阵中的元素为int范围内。
+class Clearer {
+public:
+    vector<vector<int> > clearZero(vector<vector<int> > mat, int n) {
+        int x[300]={0};
+        int y[300]={0};
+        int i,j;
+        for(i=0;i<n;i++)
+            for(j=0;j<n;j++)
+                if(mat[i][j]==0)
+                {
+                    x[i]=1;
+                    y[j]=1;
+                }
+        for(i=0;i<n;i++)
+            for(j=0;j<n;j++)
+                if(x[i]==1||y[j]==1)
+                    mat[i][j]=0;
+        return mat;
+    }
+};
+答题思路：这题原本我是一边遍历数组元素如果发现等于0就立刻把对应的行列换成0，不过我不是很清楚为什么不能通过，然后后来我怀疑可能因为不能边遍历边换，然后我设了两个数组，来记录需要被变成0的行和列。
