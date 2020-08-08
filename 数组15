@@ -1,0 +1,14 @@
+15. 在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。
+请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
+class Solution {
+public:
+    bool Find(int target, vector<vector<int> > array) {
+        int i,j;
+        for(i=0;i<array.size();i++)//array.size()是求二维数组的行
+            for(j=0;j<array[i].size();j++)//array[i].size()是求第i行的列
+                if(target==array[i][j])
+                    return 1;
+        return false;
+    }
+};
+答题思路：遍历二维数组查找该元素。
