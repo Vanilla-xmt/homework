@@ -1,0 +1,31 @@
+16. 输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字，例如，如果输入如下4 X 4矩阵： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 
+则依次打印出数字1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.
+class Solution {
+public:
+    vector<int> printMatrix(vector<vector<int> > matrix) {
+        int len1,len2;
+        len1=matrix.size();
+        len2=matrix[0].size();
+        vector<int> result;
+        if(len1==0||len2==0)
+            return result;
+        int s=0,x=len1-1,z=0,y=len2-1,i;//s,x,z,y这四个数据是分别记录一周打印的起点与上下左右四边的距离
+        while(s<=x&&z<=y)//因为顺时针打印可以知道当上下距离而且左右距离一样就是到达中间点位置了，此时就是打印的结束点
+        {
+            for(i=z;i<=y;i++)
+                result.push_back(matrix[s][i]);
+            if(s<x)
+                for(i=s+1;i<=x;i++)
+                    result.push_back(matrix[i][y]);
+            if(z<y&&s<x)
+                for(i=y-1;i>=z;i--)
+                    result.push_back(matrix[x][i]);
+            if(s+1<x&&z<y)
+                for(i=x-1;i>=s+1;i--)
+                    result.push_back(matrix[i][z]);
+            s++;x--;z++;y--;
+        }//这个里面模拟了第一次的打印过程，然后后面如果满足循环条件就一直自主打印
+        return result;
+    }
+};
+答题思路：这题需要模拟打印一周的过程，然后建立一个循环自动打印后面的。
