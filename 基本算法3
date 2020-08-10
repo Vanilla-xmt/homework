@@ -1,0 +1,22 @@
+3把M个同样的苹果放在N个同样的盘子里，允许有的盘子空着不放，问共有多少种不同的分法？（用K表示）5，1，1和1，5，1 是同一种分法。
+#include<iostream>
+using namespace std;
+int bol(int m,int n)
+{
+    if(m==0||n==1)
+        return 1;
+    if(n>m)
+        return bol(m,m);
+    else
+        return bol(m-n,n)+bol(m,n-1);
+}
+int main()
+{
+    int m,n;
+    cin>>m>>n;
+    cout<<bol(m,n)<<endl;
+    return 0;
+}
+答题思路：首先当苹果小于盘子的个数，即m<n，所以肯定有n-m个盘子是空着的，即bol(m,n)=bol(m,m)。当苹果大于等于盘子个数时，即
+m>=n。1.当没有盘子空着时，每个盘子放一个苹果，那么剩下的苹果个数是m-n个，即bol(m,n)=bol(m-n,n)。2.当至少一个盘子空着时，
+此时苹果个数是m，盘子个数是n-1，即bol(m,n)=bol(m,n-1)。所以当苹果个数大于盘子个数时，bol(m,n)=bol(m,n-1)+bol(m-n,n)。
