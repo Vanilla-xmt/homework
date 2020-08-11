@@ -1,0 +1,50 @@
+14. 输入任意（用户，成绩）序列，可以获得成绩从高到低或从低到高的排列,相同成绩都按先录入排列在前的规则处理。 
+例示：
+jack      70
+peter     96
+Tom       70
+smith     67
+从高到低  成绩 
+peter     96 
+jack      70 
+Tom       70 
+smith     67 
+从低到高 
+smith     67 
+jack      70 
+Tom       70 
+peter     96 
+注：0代表从高到低，1代表从低到高
+#include<iostream>
+#include<algorithm>
+using namespace std;
+struct student{
+        string name;
+        int average;
+}p[1000];
+bool compare1(const student &a,const student &b)
+{
+     return a.average>b.average;
+}//从大到小
+bool compare2(const student &a,const student &b)
+{
+     return a.average<b.average;
+}//从小到大
+int main()
+{
+    int n,chioce;
+    while(cin>>n>>chioce)
+    {
+        for(int i=0;i<n;i++)
+            cin>>p[i].name>>p[i].average;
+        if(chioce==1)
+                stable_sort(p,p+n,compare2);
+        else
+                stable_sort(p,p+n,compare1);//对结构体的排序
+        for(int i=0;i<n;i++)
+            cout<<p[i].name<<" "<<p[i].average<<endl;
+    }
+    return 0;
+}
+答题思路：这题是排序后输出，不同于之前的一维数组或者二维数组，这次是对结构体数组的排序，所以用到了stable_sort，
+然后这个函数必须后面要写第三项，不然会编译错误。
