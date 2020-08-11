@@ -1,0 +1,57 @@
+18. 密码要求: 1.长度超过8位
+2.包括大小写字母.数字.其它符号,以上四种至少三种
+3.不能有相同长度大于2的子串重复
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    string res;
+    while(cin>>res)
+    {
+        int len=res.size();
+        int a[4]={0};
+        int b=0,t=1;
+        if(len<=8)
+        {
+            cout<<"NG"<<endl;
+            t=0;
+        }
+        else
+        {
+            for(int i=0;i<len;i++)
+            {
+                if(res[i]>='a'&&res[i]<='z')
+                    a[0]++;
+                if(res[i]>='A'&&res[i]<='Z')
+                    a[1]++;
+                if(res[i]>='0'&&res[i]<='9')
+                    a[2]++;
+                else
+                    a[3]++;
+            }
+            for(int i=0;i<4;i++)
+                if(a[i])
+                    b++;
+            if(b<3)
+            {
+                cout<<"NG"<<endl;
+                t=0;
+            }
+            else
+            {
+                for(int i=0;i<len-3;i++)
+                    for(int j=i+3;j<len-3;j++)
+                        if(res[i]==res[j]&&res[i+1]==res[j+1]&&res[i+2]==res[j+2])
+                        {
+                            cout<<"NG"<<endl;
+                            t=0;
+                        }
+            }
+        }
+        if(t==1)
+            cout<<"OK"<<endl;
+    }
+    return 0;
+}
+答题思路：这题前两个要求都很好判断，第三个要求我选择通过遍历字符串来比较是否相同，然后我另外设了一个t来确定什么时候输出OK。
