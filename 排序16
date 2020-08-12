@@ -1,0 +1,39 @@
+16. 一个数组有 N 个元素，使用快速排序对其进行排序输出
+#include<iostream>
+#include<vector>
+using namespace std;
+void quicksort(vector<int> &a,int left,int right)
+{
+    if(left>=right)
+        return;
+    int i=left;
+    int j=right;
+    int temp=a[i];
+    while(i<j)
+    {
+        while(i<j&&a[j]>=temp)
+            j--;
+        a[i]=a[j];
+        while(i<j&&a[i]<=temp)
+            i++;
+        a[j]=a[i];
+    }
+    a[i]=temp;
+    quicksort(a,left,i-1);
+    quicksort(a,i+1,right);
+}
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int> a(n,0);
+    for(int i=0;i<n;i++)
+        cin>>a[i];
+    quicksort(a,0,n-1);
+    for(int i=0;i<n-1;i++)
+        cout<<a[i]<<" ";
+    cout<<a[n-1]<<endl;
+    return 0;
+}
+答题思路：这题因为题目要求用到了快速排序，这是一个不稳定的排序方法，多个相同数字的相对位置可能发生改变，然后这个排序方法的基本思想就是，
+首先找到一个基准数，将比基准数大的数换到基准数右边，小的数换到左边，然后再对分好区的左右两边进行第二步，直到各区间只有一个数。
