@@ -1,0 +1,27 @@
+18. 现在有一个数组，请找出数组中每个元素的后面比它大的最小的元素，若不存在则为-1。
+给定一个int数组A及数组的大小n，请返回每个元素所求的值组成的数组。保证A中元素为正整数，且n小于等于1000。
+class NextElement {
+public:
+    vector<int> findNext(vector<int> A, int n) {
+        // write code here
+        vector<int> result;
+        for(int i=0;i<n;i++)
+        {
+            vector<int> max;
+            for(int j=i+1;j<n;j++)
+            {
+                if(A[i]<A[j])
+                    max.push_back(A[j]);
+            }
+            if(max.size()>=1)
+            {
+                sort(max.begin(),max.end());
+                result.push_back(max[0]);
+            }
+            else
+                result.push_back(-1);
+        }
+        return result;
+    }
+};
+答题思路：这题用循环嵌套，然后我定义了一个动态数组储存比当前数更大的数字，然后排序，输出最小值。
