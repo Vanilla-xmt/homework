@@ -1,0 +1,17 @@
+20. 请设计一个复杂度为O(n)的算法，计算一个未排序数组中排序后相邻元素的最大差值。
+给定一个整数数组A和数组的大小n，请返回最大差值。保证数组元素个数大于等于2小于等于500。
+class MaxDivision {
+public:
+    int findMaxDivision(vector<int> A, int n) {
+        // write code here
+        int max=0;
+        sort(A.begin(),A.end());
+        for(int i=0;i<n-1;i++)
+        {
+            if(max<A[i+1]-A[i])
+                max=A[i+1]-A[i];
+        }
+        return max;
+    }
+};
+答题思路：按题目要求，首先排序，然后设一个最大值依次比较差值。
