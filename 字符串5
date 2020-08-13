@@ -1,0 +1,21 @@
+5. 在一个字符串(0<=字符串长度<=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置, 如果没有则返回 -1（需要区分大小写）.（从0开始计数）
+class Solution {
+public:
+    int FirstNotRepeatingChar(string str) {
+        int len=str.size();
+        int k;
+        for(int i=0;i<len;i++)
+        {
+            k=0;
+            for(int j=0;j<len;j++)
+            {
+                if(str[i]==str[j])
+                    k++;
+            }
+            if(k==1)
+                return i;
+        }
+        return -1;
+    }
+};
+答题思路：定义一个k来记录数字出现的次数，只要等于1，就立刻返回输出，否则等到循环结束，就输出-1.
