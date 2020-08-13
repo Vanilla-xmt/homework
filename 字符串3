@@ -1,0 +1,22 @@
+3. 请实现一个算法，确定一个字符串的所有字符是否全都不同。这里我们要求不允许使用额外的存储结构。给定一个string iniString，请返回一个bool值,True代表所有字符全都不同，False代表存在相同的字符。保证字符串中的字符为ASCII字符。字符串的长度小于等于3000。
+class Different {
+public:
+    bool checkDifferent(string iniString) {
+        // write code here
+        int k;
+        int n=iniString.size();
+        for(int i=0;i<n;i++)
+        {
+            k=0;
+            for(int j=0;j<n;j++)
+            {
+               if(iniString[i]==iniString[j])
+                   k++;
+            }
+            if(k>1)
+                return false;
+        }
+            return true;
+    }
+};
+答题思路：题目要求是不能用另外的储存数组，也就是说不能通过定义数组记录每个字母的出现次数来解题，所以我定义了一个k，在每个循环开始初始化为0，来记录每个字母的出现次数。
