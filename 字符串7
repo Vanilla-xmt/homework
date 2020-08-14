@@ -1,0 +1,12 @@
+7. 计算字符串最后一个单词的长度，单词以空格隔开。
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    string str;
+    while(cin>>str);
+    cout<<str.size()<<endl;
+    return 0;
+}
+答题思路：输入流会直接记录最后一个字符串，因为单词之间是以空格隔开的，然后再输出最后一个字符串也就是单词的大小即可。
