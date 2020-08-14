@@ -1,0 +1,40 @@
+9. 实现删除字符串中出现次数最少的字符，若多个字符出现次数一样，则都删除。输出删除这些单词后的字符串，字符串中其它字符保持原来的顺序。
+注意每个输入文件有多组输入，即多个字符串用回车隔开
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    string str;
+    while(cin>>str)
+    {
+        int a[26]={0};
+        string res,t;
+        for(int i=0;i<str.size();i++)
+            a[str[i]-'a']++;
+        int min=1;
+        for(int i=0;i<26;i++)
+        {
+            if(min>a[i]&&a[i]>0)
+                min=a[i];
+        }
+        for(int i=0;i<26;i++)
+            if(a[i]==min)
+                t+=i+'a';
+        for(int i=0;i<str.size();i++)
+        {
+            int c=0;
+            for(int j=0;j<t.size();j++)
+                if(str[i]==t[j])
+                {
+                    c=1;
+                    break;
+                }
+            if(!c)
+                res+=str[i];
+        }
+        cout<<res<<endl;
+    }
+    return 0;
+}
+答题思路：我定义了一个数组来储存每个字母的出现次数，然后求出比0大的最小值，然后再求这个最小值对应的字母有哪几个，然后再遍历原字符串，如果与这几个有一样的就删除。
