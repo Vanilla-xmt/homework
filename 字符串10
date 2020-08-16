@@ -1,0 +1,71 @@
+10. 给定两个字符串str和match，长度分别为N和M。实现一个算法，如果字符串str中含有子串match，则返回match在str中的开始位置，
+不含有则返回-1 ，若出现了多次，则按照升序输出所有出现位置 。[要求] 时间复杂度为O(n)
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+//寻找最长前缀后缀
+vector<int> GetNext(string p)
+{
+    vector<int> next(p.size());
+    next[0] = -1;
+    int k = -1, j = 0;
+    while (j < p.size() - 1)
+    {
+        if (k == -1 || p[j] == p[k]){
+            ++k;
+            ++j;
+            if (p[j] != p[k]) next[j] = k;
+            else next[j] = next[k];
+        }
+        else{
+            k = next[k];
+        }
+    }
+    return next;
+}
+//因为这里需要多个数据，所以是定义的vector类型
+vector<int> MultiKMP(string s, string p, vector<int> next)
+{
+    vector<int> res;
+    int i = 0, j = 0, slen = s.size(), plen = p.size();
+    while (i < slen)
+    {
+        if (j == -1 || s[i] == p[j]){
+            i++;
+            j++;
+        }
+        else
+        {
+            j = next[j];
+        }
+        if (j == plen)
+        {
+            res.push_back(i - j);
+            j = 0;
+        }
+    }
+    return res;
+}
+int main()
+{
+    string s;
+    string p;
+    getline(cin,s);
+    getline(cin,p);
+    vector<int> next=GetNext(p);
+    vector<int> res=MultiKMP(s,p,next);
+    if (!res.empty())
+    {
+        for (int i = 0; i < res.size(); i++){
+            cout << res[i] << ' ';
+        }
+        cout << endl;
+    }
+    else{
+        cout << -1 << endl;
+    }
+    return 0;
+}
+答题思路：因为这题要求时间复杂度是O(n)，所以要用KMP算法， Knuth-Morris-Pratt 字符串查找算法，简称为 “KMP算法”，常用于在一个文本
+串S内查找一个模式串P 的出现位置，然后因为题目对输出有要求，就是当有多次匹配成功时，按升序输出，所以对KMP算法的类型做了一点改变。
