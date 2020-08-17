@@ -1,0 +1,25 @@
+7. 叠罗汉是一个著名的游戏，游戏中一个人要站在另一个人的肩膀上。同时我们应该让下面的人比上面的人更高一点。已知参加游戏的每个人的身高，
+请编写代码计算通过选择参与游戏的人，我们最多能叠多少个人。注意这里的人都是先后到的，意味着参加游戏的人的先后顺序与原序列中的顺序应该
+一致。给定一个int数组men，代表依次来的每个人的身高。同时给定总人数n，请返回最多能叠的人数。保证n小于等于500。
+class Stack {
+public:
+    int getHeight(vector<int> men, int n) {
+        // write code here
+        if(n==0)
+            return 0;
+        vector<int> dp(n,1);//在当前位置i的最长递增子序列
+        int res=1;
+        for(int i=1;i<n;i++)
+        {
+            for(int j=i-1;j>=0;j--)
+            {
+                if(men[j]<men[i])
+                    dp[i]=max(dp[i],dp[j]+1);
+            }
+            res=max(dp[i],res);
+        }
+        return res;
+    }
+};
+答题思路：这题相当于就是求最长递增子序列，然后比较各个位置的最大值求出最后的结果。
+
