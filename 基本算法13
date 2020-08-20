@@ -1,0 +1,33 @@
+13.小易觉得高数课太无聊了，决定睡觉。不过他对课上的一些内容挺感兴趣，所以希望你在老师讲到有趣的部分的时候叫醒他一下。你知道了小易对一堂课每分钟知识点的感兴趣程度，
+并以分数量化，以及他在这堂课上每分钟是否会睡着，你可以叫醒他一次，这会使得他在接下来的k分钟内保持清醒。你需要选择一种方案最大化小易这堂课听到的知识点分值。
+#include<bits/stdc++.h>//万能头文件
+using namespace std;
+int main()
+{
+    int res=0;
+    int n,k;
+    cin>>n>>k;
+    int a[n],b[n];//a是兴趣值，b是是否清醒
+    for(int i=0;i<n;i++)
+        cin>>a[i];
+    for(int i=0;i<n;i++)
+    {
+        cin>>b[i];
+        if(b[i]==1)
+            res+=a[i];//算出基础分数
+    }
+    int maxsum=0;
+    int sum=0;
+    for(int i=0;i<n-k+1;i++)
+    {
+        sum=0;
+        for(int j=i;j<i+k;j++)
+            if(b[j]==0)
+                sum+=a[j];
+        maxsum=max(maxsum,sum);//比较大小的函数
+    }
+    cout<<res+maxsum<<endl;
+    return 0;
+}
+答题思路：这题需要求最大的兴趣值和，可以叫醒一次，根据题意，清醒时的兴趣值是一定可以获得的，所以我先求了清醒时的兴趣值，然后定义了maxsum和sum，来求每个位置往后
+k个位置增长兴趣值的最大值，最后和基础兴趣值相加得出答案。
