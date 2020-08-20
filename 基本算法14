@@ -1,0 +1,38 @@
+14. 有若干张邮票，要求从中选取最少的邮票张数凑成一个给定的总值。     如，有1分，3分，3分，3分，4分五张邮票，要求凑成10分，则使用3张邮票：3分、3分、4分即可。
+#include<iostream>
+#include<vector>
+#define mmax 0x7fffffff
+using namespace std;
+int min(int a,int b)
+{
+    return a<b?a:b;
+}
+int main()
+{
+    int m,n;
+    while(cin>>m)
+    {
+        cin>>n;
+        vector<int> c(n);
+        for(int i=0;i<n;i++)
+            cin>>c[i]; 
+        vector<int> dp(m+1);
+        for(int i=0;i<=m;i++)
+            dp[i]=mmax;
+        dp[0]=0;
+        for(int i=0;i<n;i++)  
+        {                     
+            for(int j=m;j>=0;j--)  
+            {
+                if(j-c[i]>=0&&dp[j-c[i]]!=mmax)
+                {
+                    dp[j]=min(dp[j],dp[j-c[i]]+1);
+                }
+            }
+        }
+        if(dp[m]==mmax) 
+            cout<<0<<endl;
+        else 
+            cout<<dp[m]<<endl;
+    }
+}
