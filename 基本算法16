@@ -1,0 +1,29 @@
+16. 给出一个非负整数数组，你最初在数组第一个元素的位置
+数组中的元素代表你在这个位置可以跳跃的最大长度
+判断你是否能到达数组最后一个元素的位置
+例如
+A =[2,3,1,1,4], 返回 true.
+A =[3,2,1,0,4], 返回 false.
+class Solution {
+public:
+    /**
+     * 
+     * @param A int整型一维数组 
+     * @param n int A数组长度
+     * @return bool布尔型
+     */
+    bool canJump(int* A, int n) {
+        // write code here
+        int res=0;//记录走了多少步，如果最终大于等于n-1，就true
+        int temp=A[res];//每次应该走的步数
+        while(temp!=0&&res<n-1)//当应该走的步数不为0并且总步数没有到n-1时循环
+        {
+            res+=temp;
+            temp=A[res];
+        }
+        if(res>=n-1)
+            return true;
+        else
+            return false;
+    }
+};
