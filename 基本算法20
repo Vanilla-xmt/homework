@@ -1,0 +1,64 @@
+20. 牛牛想成为牛国最健壮的牛牛。
+于是它开始疯狂锻炼，锻炼牛角，锻炼牛肌肉，锻炼牛尾巴.......
+假设牛牛现在有n个项目需要锻炼，每个项目牛教练会根据它的锻炼情况给它打分。
+对于任意一个项目i分数不能超过目标分数ai。
+对于第 i 个项目的分数不能超过目标分数ai。
+牛牛已经锻炼了一段时间，对于第i个项目已经获得了bi分。
+因为项目不同，所以每个项目牛牛想多获得一分所花费的时间也不一定相同，对于第i个项目，牛牛想多获得一分需要花费ci分钟。
+牛牛之前给自己设立了一个小目标就是要所有项目的平均分要超过d。
+问牛牛在目前情况下合理安排训练项目，达到目标最短还需要多少分钟？
+输入：
+给定一个整数n,表示有n个项目。
+给定一个整数d,表示牛牛的目标分数。
+给定a,b,c数组。
+(1 \leq n\leq 10^{5}1≤n≤105 , 1 \leq d\leq 10^{5}1≤d≤105 )
+(1 \leq b_{i} \leq a_{i} \leq 10^{5}1≤bi≤ai≤105)
+(1 \leq c_{i}\leq 10^{2}1≤ci≤102 )
+输出：
+一行一个数字表示输出达到目标最短还需要多少分钟？
+struct P{
+    int a, c;
+}p[100003];
+bool cmp(P p1, P p2){
+    return p1.c < p2.c;
+}
+typedef long long ll;
+
+class Solution {
+public:
+    /**
+     * 
+     * @param n int整型 
+     * @param d int整型 
+     * @param a int整型vector 
+     * @param b int整型vector 
+     * @param c int整型vector 
+     * @return long长整型
+     */
+    long long solve(int n, int d, vector<int>& a, vector<int>& b, vector<int>& c) {
+        // write code here
+        ll m=(ll)n*(ll)d,s=0;//目标值
+        for(int i=0;i<n;i++)
+        {
+            p[i].a = a[i]-b[i];//距离最大目标的得分
+            p[i].c = c[i];//每个项目所需时间
+            m -= b[i];//目标值减去现在已获得的得分
+        }
+        sort(p,p+n,cmp);
+        if(m<0)
+            return 0;
+        for(int i=0;i<n;i++)
+        {
+            if(p[i].a>=m)
+            {
+                s+=m*p[i].c;
+                break;
+            }
+            s+=p[i].a*p[i].c;
+            m-=p[i].a;
+        }
+        return s;
+    }
+};
+答题思路：这题考虑到时间与每种项目可加分是绑定的，所以单个排序不可取，就建立了一个结构体数组，然后再排序，因为一份ci的时间，所以我们只需要对时间排序，
+然后再从需要时间少的项目学起，最后得出最短时间。
