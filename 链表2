@@ -1,0 +1,34 @@
+2. 输入一个链表，输出该链表中倒数第k个结点。
+/*
+struct ListNode {
+	int val;
+	struct ListNode *next;
+	ListNode(int x) :
+			val(x), next(NULL) {
+	}
+};*/
+class Solution {
+public:
+    ListNode* FindKthToTail(ListNode* pListHead, unsigned int k) {
+    if(!pListHead||k==0)
+            return nullptr;
+        int length=0;
+        int zk=0;
+        ListNode* node=pListHead;
+        while(node!=NULL){
+            node=node->next;
+            length++;
+        }
+        if(k>length)
+            return nullptr;
+        zk=length-k+1;
+        int n=1;
+        node=pListHead;
+       while(n<zk){
+           node=node->next;
+           n++;
+       }
+        return node;
+    }
+};
+答题思路：这题我是遍历了两遍，第一次遍历算出所有结点的数目，然后此时倒数第k个结点就是下标为length-k的结点。
