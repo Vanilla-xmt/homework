@@ -1,0 +1,86 @@
+3. 输入两个链表，找出它们的第一个公共结点。（注意因为传入数据是链表，所以错误测试数据的提示是用其他方式显示的，保证传入数据是正确的）
+/*
+struct ListNode {
+	int val;
+	struct ListNode *next;
+	ListNode(int x) :
+			val(x), next(NULL) {
+	}
+};*/
+class Solution {
+public:
+    ListNode* FindFirstCommonNode( ListNode* pHead1, ListNode* pHead2) {
+        ListNode *p1 = pHead1;
+        ListNode *p2 = pHead2;
+        int len1=0,len2=0;
+        while(p1!=nullptr)
+        {
+            p1=p1->next;
+            len1++;
+        }
+        while(p2!=nullptr)
+        {
+            p2=p2->next;
+            len2++;
+        }
+        p1 = pHead1;
+        p2 = pHead2;
+        if(len1==len2)
+        {
+            while(p1!=nullptr&&p2!=nullptr)
+            {
+                if(p1==p2)
+                    return p1;
+                else
+                {
+                    p1=p1->next;
+                    p2=p2->next;
+                }
+            }
+            return nullptr;
+        }
+        else if(len1>len2)
+        {
+            int t=len1-len2;
+            while(t)
+            {
+                p1=p1->next;
+                t--;
+            }
+            while(p1!=nullptr&&p2!=nullptr)
+            {
+                if(p1==p2)
+                    return p1;
+                else
+                {
+                    p1=p1->next;
+                    p2=p2->next;
+                }
+            }
+            return nullptr;
+        }
+        else
+        {
+            int t=len2-len1;
+            while(t)
+            {
+                p2=p2->next;
+                t--;
+            }
+            while(p1!=nullptr&&p2!=nullptr)
+            {
+                if(p1==p2)
+                    return p1;
+                else
+                {
+                    p1=p1->next;
+                    p2=p2->next;
+                }
+            }
+            return nullptr;
+        }
+    }
+};
+答题思路：这题原本我循环的控制条件是当pHead1与pHead2都不为空指针，但是无法通过，然后再一次仔细思考题目，发现我理解错题目意思了，两个链表可能是Y型的，
+例如链表1{1,,2,3,6,7}，链表2{4,5,6,7}，所以可以选择快慢指针来解决这道题，如果两个指针长度一样则一起开始循环查找第一个元素相等的位置，如果两个指针长
+度不等，可以算出长度差，让长指针先循环长度差，然后再两个指针一起循环查找公共结点。
