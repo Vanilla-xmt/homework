@@ -1,0 +1,23 @@
+6. 输入一个链表，反转链表后，输出新链表的表头。
+/*
+struct ListNode {
+	int val;
+	struct ListNode *next;
+	ListNode(int x) :
+			val(x), next(NULL) {
+	}
+};*/
+class Solution {
+public:
+    ListNode* ReverseList(ListNode* pHead) {
+        ListNode* cur = NULL;
+        while(pHead){
+            ListNode* tmp = pHead->next;
+            pHead->next = cur;
+            cur = pHead;
+            pHead = tmp;
+        }
+        return cur;
+    }
+};
+答题思路：这题虽然题目说需要反转链表，不过并没有需要我们输出，所以反转后的链表表头就是原链表的表尾，所以遍历找到表尾并输出就可以了。
